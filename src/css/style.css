@@ -1,0 +1,14 @@
+.cat-name-list {
+    display: inline-block;
+    width: auto;
+    margin: 10px;
+    padding: 10px;
+    border: 2px solid #73AD21;
+}
+
+.cat-display {
+    display: inline-block;
+    width: auto;
+    margin: 10px;
+    padding: 10px;
+}

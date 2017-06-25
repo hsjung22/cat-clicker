@@ -1,0 +1,9 @@
+{
+  "dependencies": {},
+  "name": "cat-clicker",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:hsjung22/cat-clicker.git",
+  "author": "hsjung22 <hsjung22@gmail.com>",
+  "license": "MIT"
+}
