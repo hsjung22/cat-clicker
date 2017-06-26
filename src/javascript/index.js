@@ -1,63 +1,95 @@
 $( document ).ready(function() {
 
-  let catCollection = [
-    {
-      name: 'poplinre',
-      count: 0
+  var model = {
+    catCollection:[
+                    {
+                      name: 'poplinre',
+                      count: 0
+                    },
+                    {
+                      name: 'chewie',
+                      count: 0
+                    },
+                    {
+                      name: 'jetske',
+                      count: 0
+                    },
+                    {
+                      name: 'tom',
+                      count: 0
+                    },
+                    {
+                      name: 'garfield',
+                      count: 0
+                    },
+                    {
+                      name: 'dave',
+                      count: 0
+                    }
+                  ],
+
+    getAllCats: function() {
+      return this.catCollection;
     },
-    {
-      name: 'chewie',
-      count: 0
-    },
-    {
-      name: 'jetske',
-      count: 0
-    },
-    {
-      name: 'tom',
-      count: 0
-    },
-    {
-      name: 'garfield',
-      count: 0
+
+    addCount: function(cat) {
+      cat.count++;
     }
-  ];
 
-  function catCounterDisplay(cat){
-    let className = cat.name + "-count-display"
-    $("." + className).html("Click Counter: " + cat.count);
-  }
 
-  function selectedCatDisplay(cat){
-    // display cat image
-    $('.cat-display').html(
-      $( "<img/>", {
-        src: "src/images/" + cat.name + ".jpg",
-        height: "150px",
-        click: function() {
-          cat.count++;
-          catCounterDisplay(cat);
-        }
-      })
-    )
-    // display counter
-    $("<p/>", {
-      class: cat.name +"-count-display",
-      text: "Click Counter: " + cat.count
-    }).appendTo($('.cat-display'));
+  };
 
-  }
+  var octopus = {
+      init: function() {
+        view.renderCatNameList();
+      },
 
-  // display the names of all the cats on the left of the screen
-  // clicking on each name will display its picture with its count
-  $.map( catCollection, function( cat, i ) {
-    $("<h4/>", {
-      text: cat.name,
-      click: function() {
-        selectedCatDisplay(cat);
+      getAllCats: function() {
+        return model.getAllCats();
+      },
+
+      catSelected: function(cat) {
+        view.renderCatDisplay(cat);
+      },
+
+      addCount: function(cat) {
+        model.addCount(cat);
+        view.renderCatDisplay(cat);
       }
-    }).appendTo( $('.cat-name-list') );
-  });
+  };
 
+  var view = {
+      renderCatNameList: function() {
+        $.map( octopus.getAllCats(), function( cat, i ) {
+          $("<h4/>", {
+            text: cat.name,
+            click: function() {
+              octopus.catSelected(cat);
+            }
+          }).appendTo( $('.cat-name-list') );
+        });
+      },
+
+      renderCatDisplay: function(cat) {
+        // display cat image
+        $('.cat-display').html(
+          $( "<img/>", {
+            src: "src/images/" + cat.name + ".jpg",
+            height: "150px",
+            click: function() {
+              octopus.addCount(cat);
+            }
+          })
+        )
+        // display counter
+        $("<p/>", {
+          class: cat.name +"-count-display",
+          text: "Click Counter: " + cat.count
+        }).appendTo($('.cat-display'));
+
+      }
+  };
+
+  octopus.init();
 
 });
