@@ -49,12 +49,13 @@ $( document ).ready(function() {
       },
 
       catSelected: function(cat) {
-        view.renderCatDisplay(cat);
+        view.renderCat(cat);
+        view.renderCount(cat);
       },
 
       addCount: function(cat) {
         model.addCount(cat);
-        view.renderCatDisplay(cat);
+        view.renderCount(cat);
       }
   };
 
@@ -70,9 +71,9 @@ $( document ).ready(function() {
         });
       },
 
-      renderCatDisplay: function(cat) {
+      renderCat: function(cat) {
         // display cat image
-        $('.cat-display').html(
+        $('.cat-picture').html(
           $( "<img/>", {
             src: "src/images/" + cat.name + ".jpg",
             height: "150px",
@@ -81,12 +82,16 @@ $( document ).ready(function() {
             }
           })
         )
-        // display counter
-        $("<p/>", {
-          class: cat.name +"-count-display",
-          text: "Click Counter: " + cat.count
-        }).appendTo($('.cat-display'));
+      },
 
+      renderCount: function(cat) {
+        // display counter
+        $('.cat-count').html(
+          $("<p>", {
+            class: cat.name + "-count-display",
+            text: "Click Counter: " + cat.count
+          })
+        )
       }
   };
 
